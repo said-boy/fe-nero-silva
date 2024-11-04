@@ -6,7 +6,7 @@ import Sun from "@/components/Sun";
 import Cemara from "@/components/Cemara";
 import ButterFly from "@/components/ButterFly";
 
-export default function LandingPage() {
+export default function LandingPage({ onAnimationComplete }) {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -16,15 +16,19 @@ export default function LandingPage() {
       }, 1500);
     }
   }, [isMounted]);
+  
+  useEffect(() => {
+    setTimeout(() => {
+      setIsMounted(true);
+      onAnimationComplete();
+    }, 5500);
+  }, [onAnimationComplete]);
 
   return (
     <div className="overflow-hidden">
       {!isMounted && (
         <>
-          <div
-            className="overflow-hidden"
-            style={{ height: "100vh" }}
-          >
+          <div className="overflow-hidden" style={{ height: "100vh" }}>
             <NeroSilva />
             <div className="relative">
               <div className="absolute right-0 top-[15rem] -z-10">
@@ -43,10 +47,7 @@ export default function LandingPage() {
 
       {isMounted && (
         <>
-          <div
-            className="overflow-hidden"
-            style={{ height: "100vh" }}
-          >
+          <div className="overflow-hidden" style={{ height: "100vh" }}>
             <motion.div
               initial={{ y: 0 }}
               animate={{ y: 1000 }}
@@ -158,15 +159,16 @@ export default function LandingPage() {
               >
                 <Cemara />
               </motion.div>
-              <motion.div 
-              initial={{top:0}}
-              animate={{top:'-10rem'}}
-              transition={{
-                duration: 3.7,
-                ease: "easeInOut",
-                loop: Infinity, // Ulangi animasi
-              }}
-              className="absolute -top-[10rem] -left-[5rem]">
+              <motion.div
+                initial={{ top: 0 }}
+                animate={{ top: "-10rem" }}
+                transition={{
+                  duration: 3.7,
+                  ease: "easeInOut",
+                  loop: Infinity, // Ulangi animasi
+                }}
+                className="absolute -top-[10rem] -left-[5rem]"
+              >
                 <ButterFly />
               </motion.div>
             </div>

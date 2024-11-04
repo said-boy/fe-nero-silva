@@ -1,6 +1,6 @@
 import "./index.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import LandingPage from "./pages/LandingPage";
+import HomePage from "./pages/HomePage";
 import AuthPage from "./pages/AuthPage";
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" Component={LandingPage}></Route>
+          <Route path="/" Component={HomePage}></Route>
           <Route path="/auth">
             <Route index element={<Navigate to="/auth/signin" />} />
             <Route path=":action" element={<AuthPage />} />
