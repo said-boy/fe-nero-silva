@@ -18,7 +18,7 @@ export default function HomePage() {
   const [animate, setAnimate] = useState(true);
   return (
     <>
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden font-HelveticaNeueRoman">
         {animate ? (
           <div>
             <LandingPage onAnimationComplete={() => setAnimate(false)} />
@@ -63,13 +63,13 @@ export default function HomePage() {
                     <br />
                     <span className="text-6xl font-[500]">Rumah Anda</span>
                     <br />
-                    <p className="mt-5">
+                    <p className="mt-5 opacity-70">
                       Hidroponik adalah teknik pertanian revolusioner yang
                       memungkinkan tanaman tumbuh lebih cepat, lebih bersih, dan
                       lebih sehat tanpa membutuhkan lahan luas.
                     </p>
                     <br />
-                    <p className="mb-5">
+                    <p className="mb-5 opacity-70">
                       Pelajari lebih lanjut tentang sistem hidroponik dan mulai
                       menanam hari ini!
                     </p>

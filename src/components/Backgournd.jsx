@@ -12,7 +12,7 @@ export default function Background() {
           repeat: Infinity, // Ulangi animasi
           repeatType: "loop", // Ulangi animasi dengan cara loop
         }}
-        className="absolute top-10 left-40 h-96 w-96 bg-[#A7D7C5] rounded-full blur-[400px]"
+        className="absolute top-10 left-40 h-[30rem] w-[30rem] bg-[#A7D7C5] rounded-full blur-[400px]"
       ></motion.div>
       <motion.div
         initial={{ right: "224px" }}

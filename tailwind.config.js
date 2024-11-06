@@ -6,7 +6,11 @@ module.exports = {
     "./src/**/**/*.{html,js,jsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        HelveticaNeueRoman: ["HelveticaNeueRoman"],
+      },
+    },
   },
   plugins: [],
-}
+};
