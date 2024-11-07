@@ -21,12 +21,23 @@ export default function Menu() {
               </div>
             </Link>
           </li>
-          <li className="flex flex-col justify-center items-center  pt-[8px] pb-[6px]">
-            <Chat width="30" height="30" />
-            <small className="font-semibold">Chatbot</small>
+          <li
+            className={`flex flex-col  justify-center items-center ${location.pathname === "/chatbot"
+              ? "bg-[#74B49B]  -ml-3.5 -mr-4 my-1 pt-[7px] pb-[6px] px-[15px] rounded-[21px]"
+              : ""
+              }`}
+          >
+            <Link to={"/chatbot"}>
+              <div className="-mb-1 flex justify-center">
+                <Chat width="30" height="30" />
+              </div>
+              <div className="-mb-1 text-center">
+                <small className="font-semibold">Chatbot</small>
+              </div>
+            </Link>
           </li>
           <li
-            className={`flex flex-col justify-center items-center ${location.pathname === "/home"
+            className={`flex flex-col justify-center items-center ${location.pathname.startsWith("/home")
               ? "bg-[#74B49B] -ml-3 -mr-4 my-1 pt-[7px] pb-[6px] px-[14px] rounded-[21px]"
               : ""
               }`}

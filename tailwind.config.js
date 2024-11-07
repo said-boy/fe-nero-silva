@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       fontFamily: {
         HelveticaNeueRoman: ["HelveticaNeueRoman"],
+        HelveticaNeueBold: ["HelveticaNeueBold"],
       },
     },
   },

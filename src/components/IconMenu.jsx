@@ -1,4 +1,8 @@
-export const Date = ({ width = "24px", height = "24px" }) => {
+export const Date = ({
+  width = "24px",
+  height = "24px",
+  stroke = "#F4F9F4",
+}) => {
   return (
     <svg
       width={width}
@@ -9,28 +13,28 @@ export const Date = ({ width = "24px", height = "24px" }) => {
     >
       <path
         d="M22.5 6V3M22.5 6V9M22.5 6H15.75M4.5 15V28.5C4.5 30.1569 5.84314 31.5 7.5 31.5H28.5C30.1569 31.5 31.5 30.1569 31.5 28.5V15H4.5Z"
-        stroke="#F4F9F4"
+        stroke={stroke}
         strokeWidth="2.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M4.5 15V9C4.5 7.34314 5.84314 6 7.5 6H10.5"
-        stroke="#F4F9F4"
+        stroke={stroke}
         strokeWidth="2.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M10.5 3V9"
-        stroke="#F4F9F4"
+        stroke={stroke}
         strokeWidth="2.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M31.5 15V9C31.5 7.34314 30.1569 6 28.5 6H27.75"
-        stroke="#F4F9F4"
+        stroke={stroke}
         strokeWidth="2.5"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -100,7 +104,7 @@ export const Home = ({ width = "24px", height = "24px" }) => {
   );
 };
 
-export const Market = ({ width = "24px", height = "24px" }) => {
+export const Market = ({ width = "24px", height = "24px", stroke="#F4F9F4" }) => {
   return (
     <svg
       width={width}
@@ -111,32 +115,32 @@ export const Market = ({ width = "24px", height = "24px" }) => {
     >
       <path
         d="M30.9818 4.5H24.7401L25.4901 12C25.4901 12 26.9901 13.5 29.2401 13.5C30.9789 13.5 32.1205 12.6042 32.5495 12.1971C32.6762 12.0769 32.7236 11.9009 32.6949 11.7286L31.5737 5.00136C31.5255 4.71205 31.2751 4.5 30.9818 4.5Z"
-        stroke="#F4F9F4"
+        stroke={stroke}
         strokeWidth="2.5"
       />
       <path
         d="M24.7401 4.5L25.4901 12C25.4901 12 23.9901 13.5 21.7401 13.5C19.4901 13.5 17.9901 12 17.9901 12V4.5H24.7401Z"
-        stroke="#F4F9F4"
+        stroke={stroke}
         strokeWidth="2.5"
       />
       <path
         d="M17.9901 4.5V12C17.9901 12 16.4901 13.5 14.2401 13.5C11.9901 13.5 10.4901 12 10.4901 12L11.2401 4.5H17.9901Z"
-        stroke="#F4F9F4"
+        stroke={stroke}
         strokeWidth="2.5"
       />
       <path
         d="M11.2399 4.5H4.99814C4.70484 4.5 4.45453 4.71205 4.40631 5.00136L3.2851 11.7286C3.25638 11.9009 3.30379 12.0769 3.4305 12.1971C3.85946 12.6042 5.00102 13.5 6.73984 13.5C8.98984 13.5 10.4899 12 10.4899 12L11.2399 4.5Z"
-        stroke="#F4F9F4"
+        stroke={stroke}
         strokeWidth="2.5"
       />
       <path
         d="M4.5 13.5V29.5C4.5 30.6046 5.39543 31.5 6.5 31.5H29.5C30.6046 31.5 31.5 30.6046 31.5 29.5V13.5"
-        stroke="#F4F9F4"
+        stroke={stroke}
         strokeWidth="2.5"
       />
       <path
         d="M22.2499 31.5V22.5C22.2499 20.8431 20.9067 19.5 19.2499 19.5H16.2499C14.593 19.5 13.2499 20.8431 13.2499 22.5V31.5"
-        stroke="#F4F9F4"
+        stroke={stroke}
         strokeWidth="2.5"
         strokeMiterlimit="16"
       />

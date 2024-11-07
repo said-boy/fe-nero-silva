@@ -3,6 +3,11 @@
     src: url('assets/fonts/HelveticaNeueRoman.otf');
 }
 
+@font-face {
+    font-family: HelveticaNeueBold;
+    src: url('assets/fonts/HelveticaNeueMedium.otf');
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
