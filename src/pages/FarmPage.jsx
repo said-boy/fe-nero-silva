@@ -25,22 +25,16 @@ export default function FarmPage() {
   return (
     <>
       <Background />
-      <div className="relative font-HelveticaNeueRoman">
-        <motion.div
-          initial={{ filter: "blur(10px)" }}
-          animate={{ bottom: -700 }}
-          transition={{ duration: 1 }}
-          className="absolute"
-        ></motion.div>
+      <div className="relative font-HelveticaNeueRoman max-w-screen-xl mx-auto">
         <motion.div>
           <div className="absolute shadow-2xl -top-36 left-8 z-20 bg-[#F4F9F4] rounded-xl">
-            <NeroSilva width={80} />
+            <NeroSilva width={100} />
           </div>
           <div className="absolute top-6 right-8 z-20 rounded-xl">
             <People width={50} />
           </div>
-          <div className="absolute top-20 w-full px-10">
-            <div className="flex gap-[16px]">
+          <div className="absolute top-24 w-full px-10">
+            <div className="flex gap-[16px] justify-center">
               <div className="grid gap-y-[16px]">
                 <h1 className="text-2xl my-3 font-bold">GM, Rizby! 👋</h1>
                 <div className="flex gap-[16px]">

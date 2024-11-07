@@ -4,34 +4,40 @@ import { Date, Chat, Home, Market, Seller } from "./IconMenu";
 export default function Menu() {
   return (
     <>
-      <div className="bg-[#5C8D89] px-5 py-2 rounded-3xl text-white">
+      <div className="bg-[#5C8D89] px-5 py-1 rounded-3xl text-white">
         <ul className="flex gap-8">
           <li
-            className={`flex flex-col justify-center items-center ${
-              location.pathname === "/farm"
-                ? "bg-[#74B49B] pt-[8px] pb-[6px] px-[17px] rounded-[24px] -ml-3"
-                : ""
-            }`}
+            className={`flex flex-col  justify-center items-center ${location.pathname === "/farm"
+              ? "bg-[#74B49B]  -ml-3.5 -mr-4 my-1 pt-[7px] pb-[6px] px-[15px] rounded-[21px]"
+              : ""
+              }`}
           >
             <Link to={"/farm"}>
-              <Date width="30" height="30" />
-              <small className="font-semibold">Farm</small>
+              <div className="-mb-1 flex justify-center">
+                <Date width="30" height="30" />
+              </div>
+              <div className="-mb-1 text-center">
+                <small className="text-xs font-semibold">Farm</small>
+              </div>
             </Link>
           </li>
-          <li className="flex flex-col justify-center items-center">
+          <li className="flex flex-col justify-center items-center  pt-[8px] pb-[6px]">
             <Chat width="30" height="30" />
             <small className="font-semibold">Chatbot</small>
           </li>
           <li
-            className={`flex flex-col justify-center items-center ${
-              location.pathname === "/"
-                ? "bg-[#74B49B] pt-[8px] pb-[6px] px-[17px] rounded-[24px]"
-                : ""
-            }`}
+            className={`flex flex-col justify-center items-center ${location.pathname === "/home"
+              ? "bg-[#74B49B] -ml-3 -mr-4 my-1 pt-[7px] pb-[6px] px-[14px] rounded-[21px]"
+              : ""
+              }`}
           >
-            <Link to={"/"}>
-              <Home width="35" height="35" />
-              <small className="font-semibold -mt-1">Home</small>
+            <Link to={"/home"}>
+              <div className="-mb-1 flex justify-center">
+                <Home width="30" height="30" />
+              </div>
+              <div className="-mb-1 text-center">
+                <small className="text-xs font-semibold">Home</small>
+              </div>
             </Link>
           </li>
           <li className="flex flex-col justify-center items-center">
@@ -43,7 +49,7 @@ export default function Menu() {
             <small className="font-semibold">Seller</small>
           </li>
         </ul>
-      </div>
+      </div >
     </>
   );
 }

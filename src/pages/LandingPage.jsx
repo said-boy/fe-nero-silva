@@ -5,9 +5,20 @@ import NeroSilva from "@/components/LogoNeroSilva";
 import Sun from "@/components/Sun";
 import Cemara from "@/components/Cemara";
 import ButterFly from "@/components/ButterFly";
+import { useNavigate } from "react-router-dom";
 
-export default function LandingPage({ onAnimationComplete }) {
+export default function LandingPage() {
   const [isMounted, setIsMounted] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Setup for redirect after animation completion
+    if (isMounted) {
+      setTimeout(() => {
+        navigate("/home"); // Redirect after 4 seconds (assuming your animation duration)
+      }, 4000); // Make sure this matches the duration of your animations
+    }
+  }, [isMounted, navigate]);
 
   useEffect(() => {
     if (!isMounted) {
@@ -16,13 +27,6 @@ export default function LandingPage({ onAnimationComplete }) {
       }, 1500);
     }
   }, [isMounted]);
-  
-  useEffect(() => {
-    setTimeout(() => {
-      setIsMounted(true);
-      onAnimationComplete();
-    }, 5500);
-  }, [onAnimationComplete]);
 
   return (
     <div className="overflow-hidden">
