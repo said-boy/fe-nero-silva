@@ -5,6 +5,8 @@ import AuthPage from "./pages/AuthPage";
 import FarmPage from "./pages/FarmPage";
 import LandingPage from "./pages/LandingPage";
 import ChatbotPage from "./pages/ChatbotPage";
+import MarketPage from "./pages/MarketPage";
+import SellerPage from "./pages/SellerPage";
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
           </Route>
           <Route path="/farm" Component={FarmPage}></Route>
           <Route path="/chatbot" Component={ChatbotPage}></Route>
+          <Route path="/market" Component={MarketPage}></Route>
+          <Route path="/seller" Component={SellerPage}></Route>
         </Routes>
       </BrowserRouter>
     </>
