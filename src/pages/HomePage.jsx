@@ -21,6 +21,76 @@ import ai from "../assets/ai.png";
 export default function HomePage() {
   const { action } = useParams();
 
+  // State untuk melacak posisi dan ukuran setiap komponen
+  const [active, setActive] = useState("b");  // Menggunakan 'b' sebagai komponen default yang aktif
+  const [nonActiveProps, setNonActiveProps] = useState({ width: "288px", height: "340px" });
+  const [activeProps, setActiveProps] = useState({ width: "343px", height: "423px" });
+
+  // Fungsi untuk menangani klik pada tombol dan menukar atribut
+  const handleButtonClick = (clickedComponent) => {
+    if (clickedComponent === "a") {
+      // Tukar atribut a dengan b
+      setActiveProps({ width: "343px", height: "423px" });
+      setNonActiveProps({ width: "288px", height: "340px" });
+    } else if (clickedComponent === "b") {
+      // Tukar atribut b dengan c
+      setActiveProps({ width: "343px", height: "423px" });
+      setNonActiveProps({ width: "288px", height: "340px" });
+    } else if (clickedComponent === "c") {
+      // Tukar atribut c dengan a
+      setActiveProps({ width: "343px", height: "423px" });
+      setNonActiveProps({ width: "288px", height: "340px" });
+    }
+
+    setActive(clickedComponent); // Menandakan komponen yang aktif
+  };
+
+  const A = ({ width, height }) => {
+    return (
+      <div className={`w-[${width}] h-[${height}] bg-white rounded-[32px] flex flex-col justify-center items-center`}>
+        <img
+          src={booking}
+          alt="Booking Image"
+          className="mb-16"
+        />
+        <h1 className="text-[28px] leading-8 text-center">
+          Membantu Penanaman
+        </h1>
+      </div>
+    );
+  }
+
+  const B = ({ width, height }) => {
+    return (
+      <div className={`w-[${width}] h-[${height}] bg-white rounded-[32px] flex flex-col justify-center items-center`}>
+        <img
+          src={ai}
+          alt="Booking Image"
+          className="mb-14"
+        />
+        <h1 className="text-[28px] mx-16 leading-8 text-center">
+          Dibantu dengan AI
+        </h1>
+        <span className="text-center opacity-70 mx-14 mt-10">AI yang membantu anda dalam menyelesaikan permasalahan saat proses menanam.</span>
+      </div>
+    )
+  }
+
+  const C = ({ width, height }) => {
+    return (
+      <div className={`w-[${width}] h-[${height}] bg-white rounded-[32px] flex flex-col justify-center items-center`}>
+        <img
+          src={booking}
+          alt="Booking Image"
+          className="mb-16"
+        />
+        <h1 className="text-[28px] text-center">
+          Membantu Penanaman tiga
+        </h1>
+      </div>
+    )
+  }
+
   return (
     <>
       <Background />
@@ -254,43 +324,30 @@ export default function HomePage() {
                     <h1 className="mt-5 text-[48px] leading-[54px]">
                       Dapatkan fitur yang mempermudah anda.
                     </h1>
-                    <button className="mt-24 w-[273px] h-[67px] bg-[#5C8D89] rounded-[14.11px] shadow-lg text-white text-[21.16px] font-bold">
+                    <button className="mt-24 w-[273px] h-[67px] bg-[#5C8D89] hover:bg-white hover:text-[#5C8D89] hover:border hover:border-[#5C8D89] rounded-[14.11px] shadow-lg text-white text-[21.16px] font-bold">
                       Coba Fitur AI Chatbot
                     </button>
                   </div>
                   <div className="w-1/2">
-                    <div className="flex w-[900px] relative -inset-x-16 gap-10 items-center -mt-10">
-                      <div className="w-[288px] h-[340px] bg-white rounded-[32px] flex flex-col justify-center items-center">
-                        <img
-                          src={booking}
-                          alt="Booking Image"
-                          className="mb-16"
-                        />
-                        <h1 className="text-[28px] leading-8 text-center">
-                          Membantu Penanaman
-                        </h1>
-                      </div>
-                      <div className="w-[343px] h-[423px] bg-white rounded-[32px] flex flex-col justify-center items-center">
-                        <img
-                          src={ai}
-                          alt="Booking Image"
-                          className="mb-14"
-                        />
-                        <h1 className="text-[28px] mx-16 leading-8 text-center">
-                          Dibantu dengan AI
-                        </h1>
-                        <span className="text-center opacity-70 mx-14 mt-10">AI yang membantu anda dalam menyelesaikan permasalahan saat proses menanam.</span>
-                      </div>
-                      <div className="w-[288px] h-[340px] bg-white rounded-[32px] flex flex-col justify-center items-center">
-                        <img
-                          src={booking}
-                          alt="Booking Image"
-                          className="mb-16"
-                        />
-                        <h1 className="text-[28px] text-center">
-                          Membantu Penanaman
-                        </h1>
-                      </div>
+                    <div className="flex w-[900px] relative -inset-x-24 gap-5 items-center -mt-10">
+                      <button
+                        onClick={() => handleButtonClick("a")}
+                        className={`order-0 ${active === "a" ? "" : ""}`}
+                      >
+                        <A {...(active === "a" ? activeProps : nonActiveProps)} />
+                      </button>
+                      <button
+                        onClick={() => handleButtonClick("b")}
+                        className={`order-1 ${active === "b" ? "" : ""}`}
+                      >
+                        <B {...(active === "b" ? activeProps : nonActiveProps)} />
+                      </button>
+                      <button
+                        onClick={() => handleButtonClick("c")}
+                        className={`order-2 ${active === "c" ? "" : ""}`}
+                      >
+                        <C {...(active === "c" ? activeProps : nonActiveProps)} />
+                      </button>
                     </div>
                   </div>
                 </div>
