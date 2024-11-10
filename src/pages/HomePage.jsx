@@ -199,7 +199,7 @@ export default function HomePage() {
                       <div className="h-56 w-56 overflow-clip flex items-center justify-start rounded-lg mt-12">
                         <Rectangle />
                       </div>
-                      <span className="absolute z-10 bg-white p-3 text-[#5C8D89] rounded-xl font-[500] -bottom-5 -left-20 shadow-md">
+                      <span className="absolute z-0 bg-white p-3 text-[#5C8D89] rounded-xl font-[500] -bottom-5 -left-20 shadow-md">
                         Tanpa Media Tanah
                       </span>
                     </div>
