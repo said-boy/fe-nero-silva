@@ -133,45 +133,45 @@ export default function FarmPage() {
                   Pilih salah satu jenis tanaman yang akan ditanam.
                 </p>
                 <div class="grid grid-cols-2 gap-2">
-                  <label class="flex items-center">
-                    <input
-                      class="form-checkbox text-green-500"
-                      type="checkbox"
+                  <label class="flex items-center" htmlFor="selada">
+                    <input name="tanaman" id="selada"
+                      class=" text-green-500"
+                      type="radio"
                     />
                     <span class="ml-2">Selada</span>
                   </label>
-                  <label class="flex items-center">
-                    <input
-                      class="form-checkbox text-green-500"
-                      type="checkbox"
+                  <label class="flex items-center" htmlFor="kangkung">
+                    <input name="tanaman" id="kangkung"
+                      class=" text-green-500"
+                      type="radio"
                     />
                     <span class="ml-2">Kangkung</span>
                   </label>
-                  <label class="flex items-center">
-                    <input
-                      class="form-checkbox text-green-500"
-                      type="checkbox"
+                  <label class="flex items-center" htmlFor="sawi">
+                    <input name="tanaman" id="sawi"
+                      class=" text-green-500"
+                      type="radio"
                     />
                     <span class="ml-2">Sawi</span>
                   </label>
-                  <label class="flex items-center">
-                    <input
-                      class="form-checkbox text-green-500"
-                      type="checkbox"
+                  <label class="flex items-center" htmlFor="tomat">
+                    <input name="tanaman" id="tomat"
+                      class=" text-green-500"
+                      type="radio"
                     />
                     <span class="ml-2">Tomat</span>
                   </label>
-                  <label class="flex items-center">
-                    <input
-                      class="form-checkbox text-green-500"
-                      type="checkbox"
+                  <label class="flex items-center" htmlFor="bayam">
+                    <input name="tanaman" id="bayam"
+                      class=" text-green-500"
+                      type="radio"
                     />
                     <span class="ml-2">Bayam</span>
                   </label>
-                  <label class="flex items-center">
-                    <input
-                      class="form-checkbox text-green-500"
-                      type="checkbox"
+                  <label class="flex items-center" htmlFor="strawberi">
+                    <input name="tanaman" id="strawberi"
+                      class=" text-green-500"
+                      type="radio"
                     />
                     <span class="ml-2">Strawberi</span>
                   </label>
