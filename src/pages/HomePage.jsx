@@ -130,7 +130,7 @@ export default function HomePage() {
       <Background />
       <div className="max-w-screen-xl mx-auto font-HelveticaNeueRoman">
         <div className="relative max-w-screen-xl mx-auto">
-          <div className="absolute top-[85vh] left-8 z-20 bg-[#F4F9F4] rounded-xl">
+          <div className="absolute top-[85vh] z-0 left-8 bg-[#F4F9F4] rounded-xl">
             <Pyramid width={50} />
           </div>
           <div className="absolute shadow-2xl -top-36 left-8 z-20 bg-[#F4F9F4] rounded-xl">
