@@ -2,13 +2,56 @@ import NeroSilvaSingle from "./LogoNeroSilvaSingle";
 import NeroSilva from "./LogoNeroSilva";
 import { EyeOpen, EyeClose } from "./IconsEyes";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import axios from "axios";
 
 export default function SignUp({ to }) {
   const [open, setOpen] = useState(false);
+  const [fullname, setFullname] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [redirectToHome, setRedirectToHome] = useState(false);
+
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
   function openPassword(e) {
     setOpen(!open);
+  }
+
+  function handleSetFullname(event) {
+    setFullname(event.target.value);
+  }
+
+  function handleSetEmail(event) {
+    setEmail(event.target.value);
+  }
+
+  function handleSetPassword(event) {
+    setPassword(event.target.value);
+  }
+
+  async function submit(event) {
+    event.preventDefault();
+    try {
+      const res = await axios.post(BACKEND_URL + '/register', {
+        fullname: fullname,
+        email: email,
+        password: password
+      });
+
+      if (res.data.status === 'success') {
+        localStorage.setItem('authToken', res.data.token)
+        setRedirectToHome(true);
+      }
+
+    } catch (error) {
+      console.error('Terjadi kesalahan saat mengirim data:', error);
+    }
+  }
+
+  // If redirectToHome is true, navigate to "/home"
+  if (redirectToHome) {
+    return <Navigate to="/auth/login" replace />;
   }
 
   return (
@@ -32,6 +75,8 @@ export default function SignUp({ to }) {
             <input
               type="text"
               id="namalengkap"
+              value={fullname}
+              onChange={handleSetFullname}
               className="pl-2 rounded-md mt-1 h-8 border border-black/30"
             />
             <label htmlFor="email" className="text-xs mt-3">
@@ -40,6 +85,8 @@ export default function SignUp({ to }) {
             <input
               type="email"
               id="email"
+              value={email}
+              onChange={handleSetEmail}
               className="pl-2 rounded-md mt-1 h-8 border border-black/30"
             />
             <label htmlFor="password" className="text-xs mt-3">
@@ -49,9 +96,12 @@ export default function SignUp({ to }) {
               <input
                 type={open ? "text" : "password"}
                 id="password"
+                value={password}
+                onChange={handleSetPassword}
                 className="pl-2 rounded-md w-full mt-1 h-8 border border-black/30"
               />
               <button
+                type="button"
                 onClick={openPassword}
                 className="absolute right-0 flex mt-1 items-center justify-center border-black/30 w-8 rounded-md"
               >
@@ -62,7 +112,9 @@ export default function SignUp({ to }) {
                 )}
               </button>
             </div>
-            <button className="mt-8 p-2 rounded-md shadow-md font-bold w-40 self-center text-white bg-[#5C8D89]">
+            <button
+              onClick={submit}
+              className="mt-8 p-2 rounded-md shadow-md font-bold w-40 self-center text-white bg-[#5C8D89]">
               Sign Up
             </button>
             <small className="self-center mt-5 text-xs">
