@@ -70,7 +70,7 @@ export default function FarmPage({ verificationData }) {
           <div className="absolute top-24 w-full px-10">
             <div className="flex gap-[16px] justify-center">
               <div className="grid gap-y-[16px]">
-                <h1 className="text-2xl my-3 font-bold">GM, {verificationData.data.data.username}! 👋</h1>
+                <h1 className="text-2xl my-3 font-bold">GM, {verificationData.data.data.fullname}! 👋</h1>
                 <div className="flex gap-[16px]">
                   <div className="bg-white w-[373px] h-[160px] rounded-[20px]">
                     <div className="flex gap-1">
