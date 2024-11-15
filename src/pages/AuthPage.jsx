@@ -7,18 +7,18 @@ export default function AuthPage() {
   const { action } = useParams();
   return (
     <>
-      <div className="relative">
+      <div className="absolute w-screen h-screen">
         <Background />
+      </div>
         {action === "signin" ? (
-          <div className="absolute top-0">
+          <div className="w-full top-0">
             <SignIn to={"/auth/signup"} />
           </div>
         ) : (
-          <div className="absolute top-0">
+          <div className="w-full top-0">
             <SignUp to={"/auth/signin"} />
           </div>
         )}
-      </div>
     </>
   );
 }

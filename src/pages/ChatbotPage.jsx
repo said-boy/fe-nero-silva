@@ -19,7 +19,7 @@ export default function ChatbotPage() {
           </div>
         </div>
       </div>
-      <div className="h-screen font-HelveticaNeueRoman max-w-screen-xl mx-auto flex justify-center items-center">
+      <div className="h-[93vh] mt-6 font-HelveticaNeueRoman max-w-screen-xl mx-auto flex justify-center items-center">
         <div className="w-[1080px] h-[520px] bg-[#F4F9F4] opacity-60 absolute z-0 me-20 mb-20 rounded-2xl"></div>
         <div className="w-[1080px] h-[520px] bg-[#F4F9F4] z-10 rounded-2xl">
           <div className="p-8 h-full">
@@ -38,7 +38,7 @@ export default function ChatbotPage() {
               <div className="w-[700px] bg-white h-[52px] rounded-full flex">
                 <div className="w-[700px] flex h-[52px] items-center">
                   <input
-                    className="text-gray-500 bg-[#17181D]/5 font-HelveticaNeueRoman w-[652px] h-[52px] rounded-full px-8 focus:outline-none focus:border-0 focus:ring-0"
+                    className="text-gray-500 font-HelveticaNeueRoman w-[652px] h-[52px] rounded-full px-8 focus:outline-none focus:border-0 focus:ring-0"
                     placeholder="Tulis Pertanyaan Anda"
                     type="text"
                   />

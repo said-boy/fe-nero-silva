@@ -3,6 +3,8 @@ import NeroSilva from "./LogoNeroSilva";
 import { EyeOpen, EyeClose } from "./IconsEyes";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import NeroSilvaImage from "@/assets/nero-silva.png";
+
 
 export default function SignIn({ to }) {
   const [open, setOpen] = useState(false);
@@ -13,56 +15,67 @@ export default function SignIn({ to }) {
 
   return (
     <>
-      <div className="relative">
-        <div className="absolute z-30 w-20 -top-36 left-8 bg-red-400">
-          <NeroSilva />
+      <div className="w-full h-screen">
+        <div className="h-1/6 ps-10 pt-8">
+          <img src={NeroSilvaImage} alt="" width={100} />
         </div>
-        <div className="absolute top-10 left-[410px] z-20 bg-[#f2f3f2] rounded-xl">
-          <div className="w-[30rem] h-[80vh] p-5 flex justify-center"></div>
-        </div>
-        <div className="absolute shadow-2xl top-20 left-[450px] z-20 bg-[#F4F9F4] rounded-xl">
-          <div className="pt-12 text-center">
-            <NeroSilvaSingle />
-            <h1 className="text-3xl">Welcome back!</h1>
-          </div>
-          <div className="w-[30rem] h-[60vh] px-28 pt-10 flex flex-col">
-            <label htmlFor="email" className="text-xs">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              className="pl-2 rounded-md mt-1 h-8 border border-black/30"
-            />
-            <label htmlFor="password" className="text-xs mt-5">
-              Password
-            </label>
-            <div className="flex items-center relative">
-              <input
-                type={open ? "text" : "password"}
-                id="password"
-                className="pl-2 rounded-md w-full mt-1 h-8 border border-black/30"
-              />
-              <button
-                onClick={openPassword}
-                className="absolute right-0 flex mt-1 items-center justify-center border-black/30 w-8 rounded-md"
-              >
-                {open ? (
-                  <EyeOpen width="15px" height="15px" />
-                ) : (
-                  <EyeClose width="15px" height="15px" />
-                )}
-              </button>
+        <div className="flex justify-center h-5/6 w-full">
+          <div className="absolute z-0 h-[80%] -ms-20 -mt-10 w-8/12 bg-[#F4F9F4]/60 py-12 rounded-[20px] shadow-sm"></div>
+
+          <div className="flex z-10 flex-col h-[95%] w-8/12 bg-[#F4F9F4]/90 py-12 rounded-[20px] shadow-sm">
+            <div className="flex flex-col items-center mb-8">
+              <NeroSilvaSingle />
+              <h1 className="text-3xl mt-3 font-HelveticaNeueBold opacity-70">Welcome Back!</h1>
             </div>
-            <button className="mt-12 p-2 rounded-md shadow-md font-bold w-40 self-center text-white bg-[#5C8D89]">
-              Sign In
-            </button>
-            <small className="self-center mt-5 text-xs">
-              Belum punya akun?{" "}
-              <Link to={to} className="text-[#5C8D89] font-bold">
-                Sign Up
-              </Link>
-            </small>
+
+            <div className="flex flex-col w-full items-center">
+              <div className="mb-6 w-1/2">
+                <label class="block text-[#17181D] opacity-70 mb-3 text-[14px]">
+                  Email
+                </label>
+                <input
+                  className="p-2 px-3 block w-full h-14 border-2 border-[#83898C] focus:border-2 focus:border-[#00A0FF]  rounded-[8px] shadow-sm"
+                  type="text"
+                  />
+              </div>
+              
+              <div className="mb-20 w-1/2">
+                <label class="block text-[#17181D] opacity-70 mb-3 text-[14px]">
+                  Password
+                </label>
+                <div className="flex items-center justify-end">
+
+                <input
+                  type={open ? "text" : "password"}
+                  id="password"
+                  className="p-2 px-3 block w-full h-14 border-2 border-[#83898C] focus:border-2 focus:border-[#00A0FF]  rounded-[8px] shadow-sm"
+                />
+                <button
+                  onClick={openPassword}
+                  className="absolute flex me-3 items-center justify-center border-black/30 w-8 rounded-md"
+                >
+                  {open ? (
+                    <EyeOpen width="16px" height="16px" />
+                  ) : (
+                    <EyeClose width="16px" height="16px" />
+                  )}
+                  </button>
+                </div>
+                  
+              </div>
+                <button
+                  class="bg-[#5C8D89] hover:bg-white hover:text-[#5C8D89] hover:ease-in-out duration-300 flex gap-3 font-HelveticaNeueRoman tracking-wider text-[1.125rem] py-[0.85rem] px-[2.5rem] rounded-[18px] text-white shadow-md"
+                  type="submit"
+                >
+                  Sign In
+              </button>
+                <small className="self-center mt-5 text-[14px] font-HelveticaNeueRoman">
+                Belum punya akun?{" "}
+                  <Link to={to} className="text-[#5C8D89]">
+                    Sign Up
+                  </Link>
+                </small>
+            </div>
           </div>
         </div>
       </div>
