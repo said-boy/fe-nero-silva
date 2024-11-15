@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link, Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Background from "../components/BackgroundFarm";
 import NeroSilva from "../components/LogoNeroSilva";
@@ -8,9 +9,16 @@ import { Cloud, Rain, Task, Soil } from "../components/IconFarm";
 import Menu from "../components/Menu";
 import Leaf from "../components/Leaf";
 
-export default function FarmPage() {
+export default function FarmPage({ verificationData }) {
+
+  if (!verificationData) {
+    return <div>Loading...</div>; // Menunggu data yang dikirim
+  }
+
   // State untuk mengontrol modal
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [redirectToLogin, setRedirectToLogin] = useState(false);
 
   // Fungsi untuk membuka modal
   const openModal = () => {
@@ -22,6 +30,20 @@ export default function FarmPage() {
     setIsModalOpen(false);
   };
 
+  // Fungsi untuk membuka modal
+  const openMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const logout = () => {
+    localStorage.removeItem('authToken')
+    setRedirectToLogin(true)
+  }
+
+  if (redirectToLogin) {
+    return <Navigate to="/auth" replace />;
+  }
+
   return (
     <>
       <Background />
@@ -31,12 +53,24 @@ export default function FarmPage() {
             <NeroSilva width={100} />
           </div>
           <div className="absolute top-6 right-8 z-20 rounded-xl">
-            <People width={50} />
+            <div className="flex flex-col items-end">
+              <button onClick={openMenu}>
+                <People width={50} />
+              </button>
+              <div
+                style={isMenuOpen ? { display: "block" } : { display: "none" }}
+                className="border shadow-xl rounded-xl bg-white flex flex-col text-center">
+                <p className="py-3 mx-10">{verificationData.data.data.email}</p>
+                <Link onClick={logout}>
+                  <p className="py-2 hover:bg-red-500 hover:text-white rounded-b-xl">Logout</p>
+                </Link>
+              </div>
+            </div>
           </div>
           <div className="absolute top-24 w-full px-10">
             <div className="flex gap-[16px] justify-center">
               <div className="grid gap-y-[16px]">
-                <h1 className="text-2xl my-3 font-bold">GM, Rizby! 👋</h1>
+                <h1 className="text-2xl my-3 font-bold">GM, {verificationData.data.data.username}! 👋</h1>
                 <div className="flex gap-[16px]">
                   <div className="bg-white w-[373px] h-[160px] rounded-[20px]">
                     <div className="flex gap-1">

@@ -171,7 +171,7 @@ export default function HomePage() {
                     <Link to={"/home/features"}>
                       <button className="bg-[#5C8D89] hover:bg-white hover:text-[#5C8D89] flex gap-3 font-bold py-2 px-5 text-white rounded-lg shadow-md">
                         Bergabung Sekarang
-                        <leaf />
+                        <Leaf />
                       </button>
                     </Link>
                   </div>

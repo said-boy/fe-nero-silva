@@ -1,5 +1,6 @@
 import "./index.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import ProtectedRoute from "./components/protectedRoute";
 import HomePage from "./pages/HomePage";
 import AuthPage from "./pages/AuthPage";
 import FarmPage from "./pages/FarmPage";
@@ -22,7 +23,12 @@ function App() {
             <Route index element={<Navigate to="/auth/signin" />} />
             <Route path=":action" element={<AuthPage />} />
           </Route>
-          <Route path="/farm" Component={FarmPage}></Route>
+          <Route path="/farm" element={
+            <ProtectedRoute>
+              <FarmPage />
+            </ProtectedRoute>
+          }>
+          </Route>
           <Route path="/chatbot" Component={ChatbotPage}></Route>
           <Route path="/market" Component={MarketPage}></Route>
           <Route path="/seller" Component={SellerPage}></Route>
