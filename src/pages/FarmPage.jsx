@@ -102,7 +102,8 @@ export default function FarmPage({ verificationData }) {
         plant_id: plantSelectedOption,
         count: countPlant
       });
-      return res
+      closeModal();
+      return setPlan(res.data)
     } catch (error) {
       console.error('Terjadi kesalahan saat mengirim data:', error);
     }
@@ -236,7 +237,7 @@ export default function FarmPage({ verificationData }) {
                 </p>
                 <div className="grid grid-cols-2 gap-2">
                   {plants.data.map(item =>
-                    <label className="flex items-center" htmlFor={item.id}>
+                    <label key={item.id} className="flex items-center" htmlFor={item.id}>
                       <input name="tanaman" id={item.id}
                         value={item.id}
                         checked={plantSelectedOption == item.id}
