@@ -8,11 +8,11 @@ import axios from "axios";
 
 export default function SignIn({ to }) {
   const [open, setOpen] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [redirectToHome, setRedirectToHome] = useState(false);
 
-  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
   function openPassword(e) {
     setOpen(!open);
@@ -29,18 +29,17 @@ export default function SignIn({ to }) {
   async function submit(event) {
     event.preventDefault();
     try {
-      const res = await axios.post(BACKEND_URL + '/login', {
+      const res = await axios.post(BACKEND_URL + "/login", {
         email: email,
-        password: password
+        password: password,
       });
 
-      if (res.data.status === 'success') {
-        localStorage.setItem('authToken', res.data.token)
+      if (res.data.status === "success") {
+        localStorage.setItem("authToken", res.data.token);
         setRedirectToHome(true);
       }
-
     } catch (error) {
-      console.error('Terjadi kesalahan saat mengirim data:', error);
+      console.error("Terjadi kesalahan saat mengirim data:", error);
     }
   }
 
@@ -52,7 +51,7 @@ export default function SignIn({ to }) {
   return (
     <>
       <div className="w-full h-screen">
-        <div className="h-1/6 ps-10 pt-8">
+        <div className="h-1/6 ps-10 pt-8 z-50">
           <img src={NeroSilvaImage} alt="" width={100} />
         </div>
         <div className="flex justify-center h-5/6 w-full">
@@ -61,7 +60,9 @@ export default function SignIn({ to }) {
           <div className="flex z-10 flex-col h-[95%] w-8/12 bg-[#F4F9F4]/90 py-12 rounded-[20px] shadow-sm">
             <div className="flex flex-col items-center mb-8">
               <NeroSilvaSingle />
-              <h1 className="text-3xl mt-3 font-HelveticaNeueBold opacity-70">Welcome Back!</h1>
+              <h1 className="text-3xl mt-3 font-HelveticaNeueBold opacity-70">
+                Welcome Back!
+              </h1>
             </div>
 
             <div className="flex flex-col w-full items-center">
@@ -75,46 +76,47 @@ export default function SignIn({ to }) {
                   id="email"
                   value={email}
                   onChange={handleSetEmail}
-                  />
+                />
               </div>
-              
+
               <div className="mb-20 w-1/2">
                 <label class="block text-[#17181D] opacity-70 mb-3 text-[14px]">
                   Password
                 </label>
                 <div className="flex items-center justify-end">
-
-                <input
-                  type={open ? "text" : "password"}
-                  id="password"
-                  value={password}
-                  onChange={handleSetPassword}
-                  className="p-2 px-3 block w-full h-14 border-2 border-[#83898C] focus:border-2 focus:border-[#00A0FF]  rounded-[8px] shadow-sm"
-                />
-                <button
-                  onClick={openPassword}
-                  className="absolute flex me-3 items-center justify-center border-black/30 w-8 rounded-md"
-                >
-                  {open ? (
-                    <EyeOpen width="16px" height="16px" />
-                  ) : (
-                    <EyeClose width="16px" height="16px" />
-                  )}
+                  <input
+                    type={open ? "text" : "password"}
+                    id="password"
+                    value={password}
+                    onChange={handleSetPassword}
+                    className="p-2 px-3 block w-full h-14 border-2 border-[#83898C] focus:border-2 focus:border-[#00A0FF]  rounded-[8px] shadow-sm"
+                  />
+                  <button
+                    onClick={openPassword}
+                    className="absolute flex me-3 items-center justify-center border-black/30 w-8 rounded-md"
+                  >
+                    {open ? (
+                      <EyeOpen width="16px" height="16px" />
+                    ) : (
+                      <EyeClose width="16px" height="16px" />
+                    )}
                   </button>
-                </div>                 
-            </div>
+                </div>
+              </div>
 
-            <button
-              onClick={submit}
-              className="bg-[#5C8D89] hover:bg-white hover:text-[#5C8D89] hover:ease-in-out duration-300 flex gap-3 font-HelveticaNeueRoman tracking-wider text-[1.125rem] py-[0.85rem] px-[2.5rem] rounded-[18px] text-white shadow-md">
-              Sign In
-            </button>
-            <small className="self-center mt-5 text-[14px] font-HelveticaNeueRoman">
-              Belum punya akun?{" "}
-              <Link to={to} className="text-[#5C8D89]">
-                 Sign Up
-              </Link>
-            </small>
+              <button
+                onClick={submit}
+                className="bg-[#5C8D89] hover:bg-white hover:text-[#5C8D89] hover:ease-in-out duration-300 flex gap-3 font-HelveticaNeueRoman tracking-wider text-[1.125rem] py-[0.85rem] px-[2.5rem] rounded-[18px] text-white shadow-md"
+              >
+                Sign In
+              </button>
+              <small className="self-center mt-5 text-[14px] font-HelveticaNeueRoman">
+                Belum punya akun?{" "}
+                <Link to={to} className="text-[#5C8D89]">
+                  Sign Up
+                </Link>
+              </small>
+            </div>
           </div>
         </div>
       </div>

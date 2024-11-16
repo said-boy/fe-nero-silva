@@ -221,10 +221,10 @@ export default function FarmPage({ verificationData }) {
                     <div className="flex flex-col gap-1 justify-end p-10 -mt-3 opacity-70 text-lg leading-5">
                       {events.length > 0
                         ? events.map((item, index) => (
-                            <div
-                              key={index}
-                            >{`Tanaman ${item.plant} ${item.count} tanaman`}</div>
-                          ))
+                          <div
+                            key={index}
+                          >{`Tanaman ${item.plant} ${item.count} tanaman`}</div>
+                        ))
                         : "Anda belum mempunyai rencana perkebunan!"}
                     </div>
                   </div>
@@ -331,7 +331,7 @@ export default function FarmPage({ verificationData }) {
                   ))}
                 </div>
               </div>
-              {/* <div className="mb-4">
+              <div className="mb-4">
                 <label className="block text-[#17181D] opacity-70 mb-22">
                   Metode Hidroponik
                   <span className="text-red-500">*</span>
@@ -342,7 +342,7 @@ export default function FarmPage({ verificationData }) {
                 </select>
               </div>
               <div class="mb-4">
-                <label class="block text-[#17181D] opacity-70 mb-4">
+                <label class="block text-[#17181D] opacity-70">
                   Jumlah Tanaman
                   <span className="text-red-500">*</span>
                 </label>
@@ -350,9 +350,8 @@ export default function FarmPage({ verificationData }) {
                   className="p-2 px-4 appearance-none block w-full h-14 border-2 border-[#83898C] focus:border-2 focus:border-[#00A0FF]  rounded-[8px] shadow-sm"
                   value={countPlant}
                   onChange={handleChangeCountPlant}
-                  className="p-2 px-4 appearance-none block w-full h-14 border-2 border-[#83898C] focus:border-2 focus:border-[#00A0FF]  rounded-[8px] shadow-sm"
                   type="number"
-                  />
+                />
               </div>
               <div className="flex justify-center pt-5">
                 <button
@@ -363,7 +362,6 @@ export default function FarmPage({ verificationData }) {
                   Simpan Data
                 </button>
               </div>
-                  </div>
             </form>
           </div>
         </div>
