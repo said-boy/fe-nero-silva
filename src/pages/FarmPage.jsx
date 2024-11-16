@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Background from "../components/BackgroundFarm";
@@ -8,6 +8,7 @@ import Calendar from "../components/Calendar";
 import { Cloud, Rain, Task, Soil } from "../components/IconFarm";
 import Menu from "../components/Menu";
 import Leaf from "../components/Leaf";
+import axios from "axios";
 
 export default function FarmPage({ verificationData }) {
 
@@ -15,10 +16,17 @@ export default function FarmPage({ verificationData }) {
     return <div>Loading...</div>; // Menunggu data yang dikirim
   }
 
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
   // State untuk mengontrol modal
+  const token = localStorage.getItem('authToken');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [redirectToLogin, setRedirectToLogin] = useState(false);
+  const [plants, setPlants] = useState(null);
+  const [plantSelectedOption, setPlantSelectedOption] = useState('');
+  const [countPlant, setCountPlant] = useState(1);
+  const [plan, setPlan] = useState([]);
 
   // Fungsi untuk membuka modal
   const openModal = () => {
@@ -38,6 +46,66 @@ export default function FarmPage({ verificationData }) {
   const logout = () => {
     localStorage.removeItem('authToken')
     setRedirectToLogin(true)
+  }
+
+  const handleChangeSelectPlant = (event) => {
+    setPlantSelectedOption(event.target.value);
+  };
+
+  const handleChangeCountPlant = (event) => {
+    setCountPlant(event.target.value);
+  };
+
+  async function getPlants(token) {
+    try {
+      const res = await axios.get(BACKEND_URL + '/plant', {}, {
+        headers: {
+          'Authorization': token
+        }
+      });
+      return res;
+    } catch (error) {
+      console.error("Gagal verify token, error:", error);
+    }
+  }
+
+  useEffect(() => {
+    if (token) {
+      const verify = async () => {
+        const res = await getPlants(token);
+        const plan = await getPlan(verificationData.data.data.id)
+        setPlants(res.data);
+        setPlan(plan.data);
+      };
+      verify();
+    }
+  }, [token]);
+
+  async function getPlan(id) {
+    try {
+      const res = await axios.get(BACKEND_URL + '/plan/' + id, {}, {
+        headers: {
+          'Authorization': token
+        }
+      });
+      return res;
+    } catch (error) {
+      console.error("Gagal verify token, error:", error);
+    }
+  }
+
+  async function submit(event) {
+    event.preventDefault();
+    try {
+      const res = await axios.post(BACKEND_URL + '/plan', {
+        user_id: verificationData.data.data.id,
+        plant_id: plantSelectedOption,
+        count: countPlant
+      });
+      return res
+    } catch (error) {
+      console.error('Terjadi kesalahan saat mengirim data:', error);
+    }
   }
 
   if (redirectToLogin) {
@@ -101,7 +169,7 @@ export default function FarmPage({ verificationData }) {
                 </div>
                 <div className="p-4 bg-white w-[760px] rounded-[20px] mb-32">
                   <div className="bg-white ">
-                    <Calendar />
+                    <Calendar plan={plan.data} />
                   </div>
                 </div>
               </div>
@@ -144,95 +212,68 @@ export default function FarmPage({ verificationData }) {
       {/* Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div class="relative bg-white rounded-lg shadow-lg p-8 w-96">
+          <div className="relative bg-white rounded-lg shadow-lg p-8 w-96">
             <button
               onClick={closeModal}
               className="absolute top-0 bg-red-500 right-0 w-10 h-10 rounded-bl-xl rounded-se-lg text-white text-2xl font-bold"
             >
               X
             </button>
-            <div class="flex items-center justify-start mb-4 gap-2">
+            <div className="flex items-center justify-start mb-4 gap-2">
               <div className="bg-[#74B49B] p-[6px] rounded-full mt-2">
                 <Soil />
               </div>
-              <h1 class="text-xl font-medium mt-1">Rencana Perkebunan</h1>
+              <h1 className="text-xl font-medium mt-1">Rencana Perkebunan</h1>
             </div>
             <form>
-              <div class="mb-4">
-                <label class="block text-gray-700 font-medium mb-2">
+              <div className="mb-4">
+                <label className="block text-gray-700 font-medium mb-2">
                   Jenis Tanaman
-                  <span class="text-red-500">*</span>
+                  <span className="text-red-500">*</span>
                 </label>
-                <p class="text-gray-500 mb-2 text-xs">
+                <p className="text-gray-500 mb-2 text-xs">
                   Pilih salah satu jenis tanaman yang akan ditanam.
                 </p>
-                <div class="grid grid-cols-2 gap-2">
-                  <label class="flex items-center" htmlFor="selada">
-                    <input name="tanaman" id="selada"
-                      class=" text-green-500"
-                      type="radio"
-                    />
-                    <span class="ml-2">Selada</span>
-                  </label>
-                  <label class="flex items-center" htmlFor="kangkung">
-                    <input name="tanaman" id="kangkung"
-                      class=" text-green-500"
-                      type="radio"
-                    />
-                    <span class="ml-2">Kangkung</span>
-                  </label>
-                  <label class="flex items-center" htmlFor="sawi">
-                    <input name="tanaman" id="sawi"
-                      class=" text-green-500"
-                      type="radio"
-                    />
-                    <span class="ml-2">Sawi</span>
-                  </label>
-                  <label class="flex items-center" htmlFor="tomat">
-                    <input name="tanaman" id="tomat"
-                      class=" text-green-500"
-                      type="radio"
-                    />
-                    <span class="ml-2">Tomat</span>
-                  </label>
-                  <label class="flex items-center" htmlFor="bayam">
-                    <input name="tanaman" id="bayam"
-                      class=" text-green-500"
-                      type="radio"
-                    />
-                    <span class="ml-2">Bayam</span>
-                  </label>
-                  <label class="flex items-center" htmlFor="strawberi">
-                    <input name="tanaman" id="strawberi"
-                      class=" text-green-500"
-                      type="radio"
-                    />
-                    <span class="ml-2">Strawberi</span>
-                  </label>
+                <div className="grid grid-cols-2 gap-2">
+                  {plants.data.map(item =>
+                    <label className="flex items-center" htmlFor={item.id}>
+                      <input name="tanaman" id={item.id}
+                        value={item.id}
+                        checked={plantSelectedOption == item.id}
+                        onChange={handleChangeSelectPlant}
+                        className=" text-green-500"
+                        type="radio"
+                      />
+                      <span className="ml-2">{item.name}</span>
+                    </label>
+                  )}
                 </div>
               </div>
-              <div class="mb-4">
-                <label class="block text-gray-700 font-medium mb-2">
+              {/* <div className="mb-4">
+                <label className="block text-gray-700 font-medium mb-2">
                   Metode Hidroponik
-                  <span class="text-red-500">*</span>
+                  <span className="text-red-500">*</span>
                 </label>
-                <select class="border p-2 block w-full mt-1 border-gray-300 rounded-md shadow-sm bg-white">
+                <select className="border p-2 block w-full mt-1 border-gray-300 rounded-md shadow-sm bg-white">
                   <option>Pilih metode tanam</option>
                 </select>
-              </div>
-              <div class="mb-4">
-                <label class="block text-gray-700 font-medium mb-2">
+              </div> */}
+              <div className="mb-4">
+                <label className="block text-gray-700 font-medium mb-2">
                   Jumlah Tanaman
-                  <span class="text-red-500">*</span>
+                  <span className="text-red-500">*</span>
                 </label>
                 <input
-                  class="border p-1 block w-full mt-1 border-gray-300 rounded-md shadow-sm"
+                  value={countPlant}
+                  onChange={handleChangeCountPlant}
+                  className="border p-1 block w-full mt-1 border-gray-300 rounded-md shadow-sm"
                   type="number"
                 />
               </div>
               <div className="flex justify-center pt-5">
                 <button
-                  class="w-1/2 bg-[#5C8D89] text-white py-2 rounded-lg shadow-md hover:bg-green-600"
+                  onClick={submit}
+                  className="w-1/2 bg-[#5C8D89] text-white py-2 rounded-lg shadow-md hover:bg-green-600"
                   type="submit"
                 >
                   Simpan Data

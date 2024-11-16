@@ -46,6 +46,7 @@ const ProtectedRoute = ({ children }) => {
     }
 
     if (verificationData.status === 'error') {
+        localStorage.removeItem('authToken');
         return <Navigate to="/auth" replace />;
     }
 
