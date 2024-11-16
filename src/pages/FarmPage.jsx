@@ -11,7 +11,6 @@ import Leaf from "../components/Leaf";
 import axios from "axios";
 
 export default function FarmPage({ verificationData }) {
-
   if (!verificationData) {
     return <div>Loading...</div>; // Menunggu data yang dikirim
   }
@@ -19,14 +18,17 @@ export default function FarmPage({ verificationData }) {
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
   // State untuk mengontrol modal
-  const token = localStorage.getItem('authToken');
+  const token = localStorage.getItem("authToken");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [redirectToLogin, setRedirectToLogin] = useState(false);
   const [plants, setPlants] = useState(null);
-  const [plantSelectedOption, setPlantSelectedOption] = useState('');
+  const [plantSelectedOption, setPlantSelectedOption] = useState("");
   const [countPlant, setCountPlant] = useState(1);
   const [plan, setPlan] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [planArray, setPlanArray] = useState({});
+  const [events, setEvents] = useState([]);
 
   // Fungsi untuk membuka modal
   const openModal = () => {
@@ -44,9 +46,9 @@ export default function FarmPage({ verificationData }) {
   };
 
   const logout = () => {
-    localStorage.removeItem('authToken')
-    setRedirectToLogin(true)
-  }
+    localStorage.removeItem("authToken");
+    setRedirectToLogin(true);
+  };
 
   const handleChangeSelectPlant = (event) => {
     setPlantSelectedOption(event.target.value);
@@ -58,36 +60,85 @@ export default function FarmPage({ verificationData }) {
 
   async function getPlants(token) {
     try {
-      const res = await axios.get(BACKEND_URL + '/plant', {}, {
-        headers: {
-          'Authorization': token
+      const res = await axios.get(
+        BACKEND_URL + "/plant",
+        {},
+        {
+          headers: {
+            Authorization: token,
+          },
         }
-      });
+      );
       return res;
     } catch (error) {
       console.error("Gagal verify token, error:", error);
     }
   }
 
+  function setEventForToday(p) {
+    const newEvents = []; // Create a new array to store events
+    p.forEach((planItem) => {
+      planItem.planting.forEach((plantingItem) => {
+        const today = new Date().toISOString().split("T")[0];
+        const planDay = new Date(
+          new Date(planItem.started_at).setDate(
+            new Date(planItem.started_at).getDate() + plantingItem.day
+          )
+        )
+          .toISOString()
+          .split("T")[0];
+
+        if (today === planDay) {
+          newEvents.push({
+            time: plantingItem.timeofday,
+            plant: planItem.plant.name,
+            title: plantingItem.actifity,
+            count: planItem.count,
+            date: new Date(
+              new Date(planItem.started_at).setDate(
+                new Date(planItem.started_at).getDate() + plantingItem.day
+              )
+            )
+              .toISOString()
+              .split("T")[0],
+          });
+        }
+      });
+    });
+    setEvents(newEvents); // Set the events in the state
+  }
+
   useEffect(() => {
     if (token) {
       const verify = async () => {
-        const res = await getPlants(token);
-        const plan = await getPlan(verificationData.data.data.id)
+        const res = await getPlants(token); // Assuming getPlants is an API function
+        const planData = await getPlan(verificationData.data.data.id); // Assuming getPlan is another API function
+
         setPlants(res.data);
-        setPlan(plan.data);
+        setPlan(planData.data);
+        setPlanArray(planData.data.data);
+        setEventForToday(planData.data.data); // Call function to update events
+        setLoading(false); // Set loading to false once data is fetched
       };
       verify();
     }
   }, [token]);
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   async function getPlan(id) {
     try {
-      const res = await axios.get(BACKEND_URL + '/plan/' + id, {}, {
-        headers: {
-          'Authorization': token
+      const res = await axios.get(
+        BACKEND_URL + "/plan/" + id,
+        {},
+        {
+          headers: {
+            Authorization: token,
+          },
         }
-      });
+      );
       return res;
     } catch (error) {
       console.error("Gagal verify token, error:", error);
@@ -97,15 +148,16 @@ export default function FarmPage({ verificationData }) {
   async function submit(event) {
     event.preventDefault();
     try {
-      const res = await axios.post(BACKEND_URL + '/plan', {
+      const res = await axios.post(BACKEND_URL + "/plan", {
         user_id: verificationData.data.data.id,
         plant_id: plantSelectedOption,
-        count: countPlant
+        count: countPlant,
       });
       closeModal();
-      return setPlan(res.data)
+      setEventForToday(res.data.data);
+      return setPlan(res.data);
     } catch (error) {
-      console.error('Terjadi kesalahan saat mengirim data:', error);
+      console.error("Terjadi kesalahan saat mengirim data:", error);
     }
   }
 
@@ -128,10 +180,13 @@ export default function FarmPage({ verificationData }) {
               </button>
               <div
                 style={isMenuOpen ? { display: "block" } : { display: "none" }}
-                className="border shadow-xl rounded-xl bg-white flex flex-col text-center">
+                className="border shadow-xl rounded-xl bg-white flex flex-col text-center"
+              >
                 <p className="py-3 mx-10">{verificationData.data.data.email}</p>
                 <Link onClick={logout}>
-                  <p className="py-2 hover:bg-red-500 hover:text-white rounded-b-xl">Logout</p>
+                  <p className="py-2 hover:bg-red-500 hover:text-white rounded-b-xl">
+                    Logout
+                  </p>
                 </Link>
               </div>
             </div>
@@ -139,7 +194,9 @@ export default function FarmPage({ verificationData }) {
           <div className="absolute top-24 w-full px-10">
             <div className="flex gap-[16px] justify-center">
               <div className="grid gap-y-[16px]">
-                <h1 className="text-2xl my-3 font-bold">GM, {verificationData.data.data.fullname}! 👋</h1>
+                <h1 className="text-2xl my-3 font-bold">
+                  GM, {verificationData.data.data.fullname}! 👋
+                </h1>
                 <div className="flex gap-[16px]">
                   <div className="bg-white w-[373px] h-[160px] rounded-[20px]">
                     <div className="flex gap-1">
@@ -163,8 +220,14 @@ export default function FarmPage({ verificationData }) {
                         Informasi
                       </span>
                     </div>
-                    <div className="flex justify-end p-10 -mt-3 opacity-70 text-lg leading-5">
-                      Anda belum mempunyai rencana perkebunan!
+                    <div className="flex flex-col gap-1 justify-end p-10 -mt-3 opacity-70 text-lg leading-5">
+                      {events.length > 0
+                        ? events.map((item, index) => (
+                            <div
+                              key={index}
+                            >{`Tanaman ${item.plant} ${item.count} tanaman`}</div>
+                          ))
+                        : "Anda belum mempunyai rencana perkebunan!"}
                     </div>
                   </div>
                 </div>
@@ -184,14 +247,28 @@ export default function FarmPage({ verificationData }) {
                     Kegiatan harian
                   </span>
                 </div>
-                <div className="bg-[#F4F9F4] m-5 p-10 rounded-[20px]">
-                  <p className="-mt-[10px] opacity-70">
-                    Anda belum mempunyai agenda harian!
-                  </p>
-                  <p className="mt-5 opacity-70">
-                    Silahkan tambahkan data perencanaan anda terlebih dahulu,
-                    Tekan tombol dan mulai untuk berkebun.
-                  </p>
+                <div className="bg-[#F4F9F4] m-5 p-5 rounded-[20px]">
+                  {events.length > 0 ? (
+                    events.map((item, index) => (
+                      <div
+                        key={index}
+                        className="bg-green-100/80 p-5 mb-2 rounded-xl"
+                      >
+                        <p className="mb-5">{item.time} - {item.plant}</p>
+                        <p>{item.title}</p>
+                      </div>
+                    ))
+                  ) : (
+                    <>
+                      <p className="-mt-[10px] opacity-70">
+                        Anda belum mempunyai agenda harian!
+                      </p>
+                      <p className="mt-5 opacity-70">
+                        Silahkan tambahkan data perencanaan anda terlebih
+                        dahulu, Tekan tombol dan mulai untuk berkebun.
+                      </p>
+                    </>
+                  )}
                   <div className="flex justify-center mt-[55px]">
                     <button
                       className="shadow-lg w-[242px] h-[67px] bg-[#5C8D89] rounded-[14.11px] text-white text-xl font-bold"
@@ -236,9 +313,15 @@ export default function FarmPage({ verificationData }) {
                   Pilih salah satu jenis tanaman yang akan ditanam.
                 </p>
                 <div className="grid grid-cols-2 gap-2">
-                  {plants.data.map(item =>
-                    <label key={item.id} className="flex items-center" htmlFor={item.id}>
-                      <input name="tanaman" id={item.id}
+                  {plants.data.map((item) => (
+                    <label
+                      key={item.id}
+                      className="flex items-center"
+                      htmlFor={item.id}
+                    >
+                      <input
+                        name="tanaman"
+                        id={item.id}
                         value={item.id}
                         checked={plantSelectedOption == item.id}
                         onChange={handleChangeSelectPlant}
@@ -247,7 +330,7 @@ export default function FarmPage({ verificationData }) {
                       />
                       <span className="ml-2">{item.name}</span>
                     </label>
-                  )}
+                  ))}
                 </div>
               </div>
               {/* <div className="mb-4">
