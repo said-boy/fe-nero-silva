@@ -2,15 +2,51 @@ import NeroSilvaSingle from "./LogoNeroSilvaSingle";
 import NeroSilva from "./LogoNeroSilva";
 import { EyeOpen, EyeClose } from "./IconsEyes";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import NeroSilvaImage from "@/assets/nero-silva.png";
-
+import axios from "axios";
 
 export default function SignIn({ to }) {
   const [open, setOpen] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [redirectToHome, setRedirectToHome] = useState(false);
+
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
   function openPassword(e) {
     setOpen(!open);
+  }
+
+  function handleSetEmail(event) {
+    setEmail(event.target.value);
+  }
+
+  function handleSetPassword(event) {
+    setPassword(event.target.value);
+  }
+
+  async function submit(event) {
+    event.preventDefault();
+    try {
+      const res = await axios.post(BACKEND_URL + '/login', {
+        email: email,
+        password: password
+      });
+
+      if (res.data.status === 'success') {
+        localStorage.setItem('authToken', res.data.token)
+        setRedirectToHome(true);
+      }
+
+    } catch (error) {
+      console.error('Terjadi kesalahan saat mengirim data:', error);
+    }
+  }
+
+  // If redirectToHome is true, navigate to "/home"
+  if (redirectToHome) {
+    return <Navigate to="/home" replace />;
   }
 
   return (
@@ -35,7 +71,10 @@ export default function SignIn({ to }) {
                 </label>
                 <input
                   className="p-2 px-3 block w-full h-14 border-2 border-[#83898C] focus:border-2 focus:border-[#00A0FF]  rounded-[8px] shadow-sm"
-                  type="text"
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={handleSetEmail}
                   />
               </div>
               
@@ -48,6 +87,8 @@ export default function SignIn({ to }) {
                 <input
                   type={open ? "text" : "password"}
                   id="password"
+                  value={password}
+                  onChange={handleSetPassword}
                   className="p-2 px-3 block w-full h-14 border-2 border-[#83898C] focus:border-2 focus:border-[#00A0FF]  rounded-[8px] shadow-sm"
                 />
                 <button
@@ -60,22 +101,20 @@ export default function SignIn({ to }) {
                     <EyeClose width="16px" height="16px" />
                   )}
                   </button>
-                </div>
-                  
-              </div>
-                <button
-                  class="bg-[#5C8D89] hover:bg-white hover:text-[#5C8D89] hover:ease-in-out duration-300 flex gap-3 font-HelveticaNeueRoman tracking-wider text-[1.125rem] py-[0.85rem] px-[2.5rem] rounded-[18px] text-white shadow-md"
-                  type="submit"
-                >
-                  Sign In
-              </button>
-                <small className="self-center mt-5 text-[14px] font-HelveticaNeueRoman">
-                Belum punya akun?{" "}
-                  <Link to={to} className="text-[#5C8D89]">
-                    Sign Up
-                  </Link>
-                </small>
+                </div>                 
             </div>
+
+            <button
+              onClick={submit}
+              className="bg-[#5C8D89] hover:bg-white hover:text-[#5C8D89] hover:ease-in-out duration-300 flex gap-3 font-HelveticaNeueRoman tracking-wider text-[1.125rem] py-[0.85rem] px-[2.5rem] rounded-[18px] text-white shadow-md">
+              Sign In
+            </button>
+            <small className="self-center mt-5 text-[14px] font-HelveticaNeueRoman">
+              Belum punya akun?{" "}
+              <Link to={to} className="text-[#5C8D89]">
+                 Sign Up
+              </Link>
+            </small>
           </div>
         </div>
       </div>

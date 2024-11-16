@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import Background from "../components/Backgournd";
+import Background from "../components/BackgroundFarm";
 import SignIn from "../components/SignIn";
 import SignUp from "../components/SignUp";
 
