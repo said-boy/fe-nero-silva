@@ -20,7 +20,7 @@ export const Cloud = ({ width = "24px", height = "24px" }) => {
 };
 
 export const Rain = () => {
-  return <img src={rain} alt="Hujan" />;
+  return <img className="w-[88px]" src={rain} alt="Hujan" />;
 };
 
 export const Task = ({ width = "24px", height = "24px" }) => {

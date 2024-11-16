@@ -194,16 +194,14 @@ export default function FarmPage({ verificationData }) {
           <div className="absolute top-24 w-full px-10">
             <div className="flex gap-[16px] justify-center">
               <div className="grid gap-y-[16px]">
-                <h1 className="text-2xl my-3 font-bold">
-                  GM, {verificationData.data.data.fullname}! 👋
-                </h1>
-                <div className="flex gap-[16px]">
-                  <div className="bg-white w-[373px] h-[160px] rounded-[20px]">
-                    <div className="flex gap-1">
-                      <div className="bg-[#428EFF] p-[6px] rounded-full ml-[23px] mt-2">
+                <h1 className="text-2xl my-3 font-HelveticaNeueBold">GM, {verificationData.data.data.fullname}! 👋</h1>
+                <div className="flex gap-[16px] w-full justify-stretch">
+                  <div className="bg-white w-[372px] h-[140px] rounded-[20px]">
+                    <div className="flex gap-2 items-start h-fitt">
+                      <div className="bg-[#428EFF] p-2 flex justify-center items-center rounded-full ml-[23px] mt-2">
                         <Cloud />
                       </div>
-                      <span className="opacity-70 text-xl self-end">
+                      <span className="opacity-70 text-lg self-center mt-2">
                         Cuaca Hari Ini
                       </span>
                     </div>
@@ -211,12 +209,12 @@ export default function FarmPage({ verificationData }) {
                       <Rain />
                     </div>
                   </div>
-                  <div className="bg-white w-[373px] h-[160px] rounded-[20px]">
-                    <div className="flex gap-1">
-                      <div className="bg-[#7367F0] p-[6px] rounded-full ml-[23px] mt-2">
+                  <div className="bg-white w-[372px] h-[140px] rounded-[20px]">
+                    <div className="flex gap-2 items-start h-fitt">
+                      <div className="bg-[#7367F0] p-2 flex justify-center items-center rounded-full ml-[23px] mt-2">
                         <Leaf />
                       </div>
-                      <span className="opacity-70 text-xl self-end">
+                      <span className="opacity-70 text-lg self-center mt-2">
                         Informasi
                       </span>
                     </div>
@@ -238,12 +236,12 @@ export default function FarmPage({ verificationData }) {
                 </div>
               </div>
               <div className="w-1 bg-white mt-[4.5rem] mb-32"> </div>
-              <div className="bg-white w-[492px] rounded-[20px] p-4 mb-32 mt-[4.5rem]">
-                <div className="flex gap-1">
-                  <div className="bg-[#74B49B] p-[6px] rounded-full ml-[23px] mt-2">
+              <div className="bg-white w-[492px] h-fit rounded-[20px] py-3 mb-32 mt-[4.5rem]">
+                <div className="flex gap-2">
+                  <div className="bg-[#74B49B] p-2 flex justify-center items-center rounded-full ml-[23px] mt-2">
                     <Task />
                   </div>
-                  <span className="opacity-70 text-xl self-end">
+                  <span className="opacity-70 text-xl self-center mt-2">
                     Kegiatan harian
                   </span>
                 </div>
@@ -271,7 +269,7 @@ export default function FarmPage({ verificationData }) {
                   )}
                   <div className="flex justify-center mt-[55px]">
                     <button
-                      className="shadow-lg w-[242px] h-[67px] bg-[#5C8D89] rounded-[14.11px] text-white text-xl font-bold"
+                      className="bg-[#5C8D89] hover:bg-white hover:text-[#5C8D89] hover:ease-in-out duration-300 flex gap-3 font-HelveticaNeueRoman tracking-wider text-lg py-4 px-9 rounded-[20px] text-white shadow-md"
                       onClick={openModal} // Memanggil fungsi openModal untuk membuka modal
                     >
                       Mulai Berkebun
@@ -290,33 +288,33 @@ export default function FarmPage({ verificationData }) {
       {/* Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="relative bg-white rounded-lg shadow-lg p-8 w-96">
+          <div class="relative bg-white rounded-[20px] shadow-lg px-9 py-12 w-5/12 h-[89svh]">
             <button
               onClick={closeModal}
-              className="absolute top-0 bg-red-500 right-0 w-10 h-10 rounded-bl-xl rounded-se-lg text-white text-2xl font-bold"
+              className="absolute top-2 right-2 w-10 h-10 flex justify-center items-center rounded-full ]"
             >
-              X
+              <svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#000000"><path d="M6.75827 17.2426L12.0009 12M17.2435 6.75736L12.0009 12M12.0009 12L6.75827 6.75736M12.0009 12L17.2435 17.2426" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
             </button>
-            <div className="flex items-center justify-start mb-4 gap-2">
-              <div className="bg-[#74B49B] p-[6px] rounded-full mt-2">
+            <div class="flex items-center justify-start mb-4 gap-2 -mt-3.5">
+              <div className="bg-[#74B49B] p-2 rounded-full">
                 <Soil />
               </div>
-              <h1 className="text-xl font-medium mt-1">Rencana Perkebunan</h1>
+              <h1 class="opacity-70 text-xl self-center font-HelveticaNeueRoman">Rencana Perkebunan</h1>
             </div>
             <form>
-              <div className="mb-4">
-                <label className="block text-gray-700 font-medium mb-2">
+              <div class="mb-4 bg-[#F4F9F4] p-8 rounded-[20px]">
+                <label class="block text-[#17181D] text-lg opacity-70 mb-2">
                   Jenis Tanaman
                   <span className="text-red-500">*</span>
                 </label>
-                <p className="text-gray-500 mb-2 text-xs">
+                <p className="text-[#17181D] opacity-60 mb-8 text-xs">
                   Pilih salah satu jenis tanaman yang akan ditanam.
                 </p>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-2 gap-4 mb-8">
                   {plants.data.map((item) => (
                     <label
                       key={item.id}
-                      className="flex items-center"
+                      className="flex items-center text-[#83898C]"
                       htmlFor={item.id}
                     >
                       <input
@@ -334,35 +332,38 @@ export default function FarmPage({ verificationData }) {
                 </div>
               </div>
               {/* <div className="mb-4">
-                <label className="block text-gray-700 font-medium mb-2">
+                <label className="block text-[#17181D] opacity-70 mb-22">
                   Metode Hidroponik
                   <span className="text-red-500">*</span>
                 </label>
-                <select className="border p-2 block w-full mt-1 border-gray-300 rounded-md shadow-sm bg-white">
-                  <option>Pilih metode tanam</option>
+                <select className="p-2 appearance-none block w-full h-14 mt-1 placeholder:text-[#17181D] opacity-70 border-2 focus:border-2 border-[#83898C] focus:border-[#00A0FF] rounded-[8px] px-4 shadow-sm bg-white">
+                  <option className="text-[#5E6366] h-12" disabled selected>Pilih metode tanam</option>
+                  <option className="hover:bg-[#74B49B] text-[#17181D] opacity-70 h-12">Wick System</option>
                 </select>
-              </div> */}
-              <div className="mb-4">
-                <label className="block text-gray-700 font-medium mb-2">
+              </div>
+              <div class="mb-4">
+                <label class="block text-[#17181D] opacity-70 mb-4">
                   Jumlah Tanaman
                   <span className="text-red-500">*</span>
                 </label>
                 <input
+                  className="p-2 px-4 appearance-none block w-full h-14 border-2 border-[#83898C] focus:border-2 focus:border-[#00A0FF]  rounded-[8px] shadow-sm"
                   value={countPlant}
                   onChange={handleChangeCountPlant}
-                  className="border p-1 block w-full mt-1 border-gray-300 rounded-md shadow-sm"
+                  className="p-2 px-4 appearance-none block w-full h-14 border-2 border-[#83898C] focus:border-2 focus:border-[#00A0FF]  rounded-[8px] shadow-sm"
                   type="number"
-                />
+                  />
               </div>
               <div className="flex justify-center pt-5">
                 <button
                   onClick={submit}
-                  className="w-1/2 bg-[#5C8D89] text-white py-2 rounded-lg shadow-md hover:bg-green-600"
+                  className="bg-[#5C8D89] hover:bg-white hover:text-[#5C8D89] hover:ease-in-out duration-300 flex gap-3 font-HelveticaNeueRoman tracking-wider text-[1.125rem] py-[0.85rem] px-[2.2rem] rounded-[18px] text-white shadow-md"
                   type="submit"
                 >
                   Simpan Data
                 </button>
               </div>
+                  </div>
             </form>
           </div>
         </div>

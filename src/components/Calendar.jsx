@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
+import './../calender.css'
 import interactionPlugin from '@fullcalendar/interaction';
 
 export default function Calendar({ plan }) {
@@ -43,6 +44,11 @@ export default function Calendar({ plan }) {
         events={events}
         dateClick={handleDateClick}
         dayMaxEvents={1}
+        headerToolbar={{
+          start: "prev,next",
+          center: "",
+          end: "title"
+        }}
       />
 
       {/* Modal */}
