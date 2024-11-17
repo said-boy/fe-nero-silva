@@ -67,7 +67,7 @@ export default function SignIn({ to }) {
 
             <div className="flex flex-col w-full items-center">
               <div className="mb-6 w-1/2">
-                <label class="block text-[#17181D] opacity-70 mb-3 text-[14px]">
+                <label className="block text-[#17181D] opacity-70 mb-3 text-[14px]">
                   Email
                 </label>
                 <input
@@ -80,7 +80,7 @@ export default function SignIn({ to }) {
               </div>
 
               <div className="mb-20 w-1/2">
-                <label class="block text-[#17181D] opacity-70 mb-3 text-[14px]">
+                <label className="block text-[#17181D] opacity-70 mb-3 text-[14px]">
                   Password
                 </label>
                 <div className="flex items-center justify-end">

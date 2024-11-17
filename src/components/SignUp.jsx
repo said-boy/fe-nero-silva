@@ -75,7 +75,7 @@ export default function SignUp({ to }) {
               <div className="mb-4 w-1/2">
                 <label
                   htmlFor="namalengkap"
-                  class="block text-[#17181D] opacity-70 mb-3 text-[14px]"
+                  className="block text-[#17181D] opacity-70 mb-3 text-[14px]"
                 >
                   Nama Lengkap
                 </label>
@@ -90,7 +90,7 @@ export default function SignUp({ to }) {
               <div className="mb-4 w-1/2">
                 <label
                   htmlFor="email"
-                  class="block text-[#17181D] opacity-70 mb-3 text-[14px]"
+                  className="block text-[#17181D] opacity-70 mb-3 text-[14px]"
                 >
                   Email
                 </label>
@@ -106,7 +106,7 @@ export default function SignUp({ to }) {
               <div className="mb-14 w-1/2">
                 <label
                   htmlFor="password"
-                  class="block text-[#17181D] opacity-70 mb-3 text-[14px]"
+                  className="block text-[#17181D] opacity-70 mb-3 text-[14px]"
                 >
                   Password
                 </label>

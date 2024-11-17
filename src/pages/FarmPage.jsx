@@ -288,22 +288,22 @@ export default function FarmPage({ verificationData }) {
       {/* Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div class="relative bg-white rounded-[20px] shadow-lg px-9 py-12 w-5/12 h-[89svh]">
+          <div className="relative bg-white rounded-[20px] shadow-lg px-9 py-12 w-5/12 h-[89svh]">
             <button
               onClick={closeModal}
               className="absolute top-2 right-2 w-10 h-10 flex justify-center items-center rounded-full ]"
             >
-              <svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#000000"><path d="M6.75827 17.2426L12.0009 12M17.2435 6.75736L12.0009 12M12.0009 12L6.75827 6.75736M12.0009 12L17.2435 17.2426" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              <svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#000000"><path d="M6.75827 17.2426L12.0009 12M17.2435 6.75736L12.0009 12M12.0009 12L6.75827 6.75736M12.0009 12L17.2435 17.2426" stroke="#000000" stroke-width="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>
             </button>
-            <div class="flex items-center justify-start mb-4 gap-2 -mt-3.5">
+            <div className="flex items-center justify-start mb-4 gap-2 -mt-3.5">
               <div className="bg-[#74B49B] p-2 rounded-full">
                 <Soil />
               </div>
-              <h1 class="opacity-70 text-xl self-center font-HelveticaNeueRoman">Rencana Perkebunan</h1>
+              <h1 className="opacity-70 text-xl self-center font-HelveticaNeueRoman">Rencana Perkebunan</h1>
             </div>
             <form>
-              <div class="mb-4 bg-[#F4F9F4] p-8 rounded-[20px]">
-                <label class="block text-[#17181D] text-lg opacity-70 mb-2">
+              <div className="mb-4 bg-[#F4F9F4] p-8 rounded-[20px]">
+                <label className="block text-[#17181D] text-lg opacity-70 mb-2">
                   Jenis Tanaman
                   <span className="text-red-500">*</span>
                 </label>
@@ -341,8 +341,8 @@ export default function FarmPage({ verificationData }) {
                   <option className="hover:bg-[#74B49B] text-[#17181D] opacity-70 h-12">Wick System</option>
                 </select>
               </div>
-              <div class="mb-4">
-                <label class="block text-[#17181D] opacity-70">
+              <div className="mb-4">
+                <label className="block text-[#17181D] opacity-70">
                   Jumlah Tanaman
                   <span className="text-red-500">*</span>
                 </label>
