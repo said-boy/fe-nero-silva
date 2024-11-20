@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import NeroSilvaImage from "@/assets/nero-silva.png";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export default function SignIn({ to }) {
   const [open, setOpen] = useState(false);
@@ -13,6 +14,18 @@ export default function SignIn({ to }) {
   const [redirectToHome, setRedirectToHome] = useState(false);
 
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    }
+  });
 
   function openPassword(e) {
     setOpen(!open);
@@ -34,12 +47,21 @@ export default function SignIn({ to }) {
         password: password,
       });
 
-      if (res.data.status === "success") {
-        localStorage.setItem("authToken", res.data.token);
-        setRedirectToHome(true);
-      }
+      // Jika berhasil
+      Toast.fire({
+        icon: res.data.status,
+        title: "Login Berhasil",
+        text: res.data.message,
+      });
+
+      localStorage.setItem("authToken", res.data.token);
+      setRedirectToHome(true);
     } catch (error) {
-      console.error("Terjadi kesalahan saat mengirim data:", error);
+      Toast.fire({
+        icon: error.response.data.status,
+        title: "Login Gagal",
+        text: error.response.data.message,
+      });
     }
   }
 
