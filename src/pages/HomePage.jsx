@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import LandingPage from "./LandingPage";
@@ -20,14 +20,66 @@ import ai from "../assets/ai.png";
 import bghomemarketplace from "../assets/market.png";
 import marketplace from "../assets/marketplace.png";
 import bgHomeFarm from "../assets/farm.png";
+import axios from "axios";
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
+async function verifyToken(token) {
+  try {
+    const res = await axios.post(BACKEND_URL + '/verify', {}, {
+      headers: {
+        'Authorization': token
+      }
+    });
+    return res;
+  } catch (error) {
+    console.error("Gagal verify token, error:", error);
+  }
+}
 
 export default function HomePage() {
   const { action } = useParams();
+  const token = localStorage.getItem('authToken');
+
+  const [verificationData, setVerificationData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const verify = async () => {
+      if (!token) {
+        setIsLoading(false); // Jika token tidak ada, langsung set loading selesai
+        return;
+      }
+
+      try {
+        const data = await verifyToken(token); // Panggil fungsi verifyToken
+        setVerificationData(data); // Simpan hasil verifikasi
+      } catch (error) {
+        console.error("Verifikasi gagal:", error);
+      } finally {
+        setIsLoading(false); // Pastikan loading selesai
+      }
+    };
+
+    verify(); // Jalankan fungsi verify
+  }, [token]);
+
+
 
   // State untuk melacak posisi dan ukuran setiap komponen
   const [active, setActive] = useState("b");  // Menggunakan 'b' sebagai komponen default yang aktif
   const [nonActiveProps, setNonActiveProps] = useState({ width: "288px", height: "340px" });
   const [activeProps, setActiveProps] = useState({ width: "343px", height: "423px" });
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const openMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const logout = () => {
+    localStorage.removeItem("authToken");
+    setRedirectToLogin(true);
+  };
 
   // State untuk melacak urutan setiap komponen
   const [order, setOrder] = useState({ a: 0, b: 1, c: 2 });
@@ -126,6 +178,10 @@ export default function HomePage() {
     )
   }
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <Background />
@@ -138,7 +194,30 @@ export default function HomePage() {
             <NeroSilva width={100} />
           </div>
           <div className="absolute top-6 right-8 z-20 rounded-xl">
-            <People width={50} />
+            <div className="flex flex-col items-end">
+              <button onClick={openMenu}>
+                <People width={50} />
+              </button>
+              <div
+                style={isMenuOpen ? { display: "block" } : { display: "none" }}
+                className="border shadow-xl rounded-xl bg-white flex flex-col text-center"
+              >
+                <p className="py-3 mx-10">{verificationData != null ? verificationData.data.data.email : 'Hello Guest'}</p>
+                {verificationData != null ? (
+                  <Link onClick={logout}>
+                    <p className="py-2 hover:bg-red-500 hover:text-white rounded-b-xl">
+                      Logout
+                    </p>
+                  </Link>
+                ) : (
+                  <Link to="/auth">
+                    <p className="py-2 hover:bg-[#5C8D89] hover:text-white rounded-b-xl">
+                      Login
+                    </p>
+                  </Link>
+                )}
+              </div>
+            </div>
           </div>
         </div>
         <div className="relative top-[15vh] flex items-end max-w-screen-xl mx-auto">
