@@ -307,7 +307,7 @@ export default function LogsPage({ verificationData }) {
                 <div className="bg-[#74B49B] p-2 rounded-full">
                   <Soil />
                 </div>
-                <h1 className="opacity-70 text-xl self-center font-HelveticaNeueRoman">Hasil penanaman {plan.data[0].id}</h1>
+                <h1 className="opacity-70 text-xl self-center font-HelveticaNeueRoman">Hasil penanaman</h1>
               </div>
               <form>
                 <div className="mb-4">
