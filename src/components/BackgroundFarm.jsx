@@ -15,7 +15,8 @@ export default function BackgroundFarm() {
           repeat: Infinity,
           repeatType: "loop",
         }}
-        className="absolute top-10 left-40 h-[40rem] w-[40rem] bg-[#A7D7C5] rounded-full blur-[1500px] opacity-70"
+        style={{filter: "blur(100px)"}}
+        className="absolute top-10 left-40 h-[40rem] w-[40rem] bg-[#A7D7C5] rounded-full opacity-70"
       ></motion.div>
       <motion.div
         initial={{ right: "224px" }}
@@ -26,7 +27,8 @@ export default function BackgroundFarm() {
           repeat: Infinity,
           repeatType: "loop",
         }}
-        className="absolute top-[450px] right-56 h-[30rem] w-[30rem] bg-[#FF9F43] rounded-full blur-[1500px] opacity-70"
+        style={{filter: "blur(100px)"}}
+        className="absolute top-[450px] right-56 h-[30rem] w-[30rem] bg-[#FF9F43] rounded-full opacity-70"
       ></motion.div>
       <motion.div
         initial={{ top: "20px" }}
@@ -37,7 +39,8 @@ export default function BackgroundFarm() {
           repeat: Infinity,
           repeatType: "loop",
         }}
-        className="absolute top-5 right-28 h-[30rem] w-[30rem] bg-[#7367F0] rounded-full blur-[1500px] opacity-70"
+        style={{filter: "blur(100px)"}}
+        className="absolute top-5 right-28 h-[30rem] w-[30rem] bg-[#7367F0] rounded-full opacity-70"
       ></motion.div>
     </div>
   );

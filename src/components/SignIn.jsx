@@ -41,29 +41,61 @@ export default function SignIn({ to }) {
 
   async function submit(event) {
     event.preventDefault();
+
+    // Validasi input
+    if (!email || !password) {
+      return Toast.fire({
+        icon: "warning",
+        title: "Login Gagal",
+        text: "Email dan password wajib diisi!",
+      });
+    }
+
     try {
-      const res = await axios.post(BACKEND_URL + "/login", {
+      // Tampilkan indikator loading (opsional)
+      Toast.fire({
+        icon: "info",
+        title: "Memproses login...",
+        timer: 1500,
+      });
+
+      // Kirim permintaan ke server
+      const res = await axios.post(`${BACKEND_URL}/login`, {
         email: email,
         password: password,
       });
 
       // Jika berhasil
       Toast.fire({
-        icon: res.data.status,
+        icon: res.data.status || "success",
         title: "Login Berhasil",
         text: res.data.message,
       });
 
+      // Simpan token ke localStorage
       localStorage.setItem("authToken", res.data.token);
+
+      // Arahkan ke halaman home
       setRedirectToHome(true);
     } catch (error) {
-      Toast.fire({
-        icon: error.response.data.status,
-        title: "Login Gagal",
-        text: error.response.data.message,
-      });
+      // Jika error dari server
+      if (error.response && error.response.data) {
+        Toast.fire({
+          icon: error.response.data.status || "error",
+          title: "Login Gagal",
+          text: error.response.data.message || "Terjadi kesalahan pada server.",
+        });
+      } else {
+        // Jika error dari jaringan atau masalah lain
+        Toast.fire({
+          icon: "error",
+          title: "Login Gagal",
+          text: "Tidak dapat terhubung ke server. Silakan coba lagi nanti.",
+        });
+      }
     }
   }
+
 
   // If redirectToHome is true, navigate to "/home"
   if (redirectToHome) {
