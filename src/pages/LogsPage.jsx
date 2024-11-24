@@ -259,7 +259,7 @@ export default function LogsPage({ verificationData }) {
                     </span>
                   </div>
                   <div className="h-full flex justify-center items-center -mt-8">
-                    <h1 className="text-7xl text-center text-green-600 font-extrabold">{calculate.succes}%</h1>
+                    <h1 className="text-7xl text-center text-green-600 font-extrabold">{calculate.succes ?? 0}%</h1>
                   </div>
                 </div>
                 <div className="bg-white w-1/2 h-[180px] rounded-[20px]">
@@ -269,7 +269,7 @@ export default function LogsPage({ verificationData }) {
                     </span>
                   </div>
                   <div className="h-full flex justify-center items-center -mt-8">
-                    <h1 className="text-7xl text-center text-red-600 font-extrabold">{calculate.fail}%</h1>
+                    <h1 className="text-7xl text-center text-red-600 font-extrabold">{calculate.fail ?? 0}%</h1>
                   </div>
                 </div>
               </div>
