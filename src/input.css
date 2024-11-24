@@ -1,3 +1,7 @@
+/* Impor gaya PrimeReact */
+@import "primereact/resources/themes/lara-light-blue/theme.css"; /* Pilih tema */
+@import "primereact/resources/primereact.min.css";
+
 @font-face {
     font-family: HelveticaNeueRoman;
     src: url('assets/fonts/HelveticaNeueRoman.otf');

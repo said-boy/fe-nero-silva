@@ -4,10 +4,12 @@ import ProtectedRoute from "./components/protectedRoute";
 import HomePage from "./pages/HomePage";
 import AuthPage from "./pages/AuthPage";
 import FarmPage from "./pages/FarmPage";
+import LogsPage from "./pages/LogsPage";
 import LandingPage from "./pages/LandingPage";
 import ChatbotPage from "./pages/ChatbotPage";
 import MarketPage from "./pages/MarketPage";
 import SellerPage from "./pages/SellerPage";
+import { PrimeReactProvider } from 'primereact/api';
 
 function App() {
   return (
@@ -27,6 +29,14 @@ function App() {
             <ProtectedRoute>
               <FarmPage />
             </ProtectedRoute>
+          }>
+          </Route>
+          <Route path="/logs" element={
+            <PrimeReactProvider>
+              <ProtectedRoute>
+                <LogsPage />
+              </ProtectedRoute>
+            </PrimeReactProvider>
           }>
           </Route>
           <Route path="/chatbot" Component={ChatbotPage}></Route>

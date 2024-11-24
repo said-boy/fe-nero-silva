@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Date, Chat, Home, Market, Seller } from "./IconMenu";
+import { Date, Chat, Home, Market, Seller, Logs } from "./IconMenu";
 
 export default function Menu() {
   return (
@@ -21,7 +21,7 @@ export default function Menu() {
               </div>
             </Link>
           </li>
-          <li
+          {/* <li
             className={`w-[72px] rounded-[24px] px-[16px] py-[10px] ${location.pathname.startsWith("/chatbot")
               ? "bg-[#74B49B]"
               : ""
@@ -35,7 +35,7 @@ export default function Menu() {
                 <small className="text-[0.65rem] tracking-wider font-HelveticaNeueBold">Chatbot</small>
               </div>
             </Link>
-          </li>
+          </li> */}
           <li
             className={`w-[72px] rounded-[24px] px-[16px] py-[10px] ${location.pathname.startsWith("/home")
               ? "bg-[#74B49B]"
@@ -52,6 +52,21 @@ export default function Menu() {
             </Link>
           </li>
           <li
+            className={`w-[72px] rounded-[24px] px-[16px] py-[10px] ${location.pathname.startsWith("/logs")
+              ? "bg-[#74B49B]"
+              : ""
+              }`}
+          >
+            <Link to={"/logs"}>
+              <div className="-mb-1 flex justify-center">
+                <Logs width="30" height="30" />
+              </div>
+              <div className="-mb-1 text-center">
+                <small className="text-[0.65rem] tracking-wider font-HelveticaNeueBold">Logs</small>
+              </div>
+            </Link>
+          </li>
+          {/* <li
             className={`w-[72px] rounded-[24px] px-[16px] py-[10px] ${location.pathname.startsWith("/market")
               ? "bg-[#74B49B]"
               : ""
@@ -65,8 +80,8 @@ export default function Menu() {
                 <small className="text-[0.65rem] tracking-wider font-HelveticaNeueBold">Market</small>
               </div>
             </Link>
-          </li>
-          <li
+          </li> */}
+          {/* <li
             className={`w-[72px] rounded-[24px] px-[16px] py-[10px] ${location.pathname.startsWith("/seller")
               ? "bg-[#74B49B]"
               : ""
@@ -80,7 +95,7 @@ export default function Menu() {
                 <small className="text-[0.65rem] tracking-wider font-HelveticaNeueBold">Seller</small>
               </div>
             </Link>
-          </li>
+          </li> */}
         </ul>
       </div >
     </>
